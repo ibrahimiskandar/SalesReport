@@ -6,13 +6,15 @@ Report web application in ASP .Net Core (MVC) with EF core.
 * Visual Studio 2019 
 * ASP.NET Core 3.1 
 * .Net Core 3.1
+* Entity Framework
 
 ## How to run the project
 
 * Git clone this project to a location in your disk.
 * Open the solution file Reporter.sln using the Visual Studio 2019.
 * Restore the NuGet packages by rebuilding the solution.
-* Change the connection string in appsettings.json file.
+* Import Data-Tier application(.bacpac) from .../Reporter/Data/ExcelDb.bacpac.
+* Change the according settings in appsettings.json file.
 * Run the project(it will open a web browser with application running on it).
 
 ## Application Functinality
