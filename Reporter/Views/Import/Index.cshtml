@@ -1,0 +1,30 @@
+﻿
+@model Reporter.Models.Excel
+
+@{
+    ViewData["Title"] = "Import";
+    
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<form asp-controller="Import" asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="mb-3">
+        <label asp-for="ExcelFile">Upload Excel File</label>
+        <input asp-for="ExcelFile" />
+        <button type="submit" class="btn btn-success">Import</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back</a>
+    </div>
+</form>
+

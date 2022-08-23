@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Reporter.Models.SalesTable>
+
+
+@{
+    ViewData["Title"] = "Index";
+    int count = 1;
+    Pagination pagination = new Pagination();
+
+
+
+    int pageNo = 0;
+
+    if (ViewBag.Pagination != null)
+    {
+        pagination = ViewBag.Pagination;
+        pageNo = pagination.CurrentPage;
+
+    }
+}
+
+<div class="card-body">
+    <!-- Grid row -->
+    <div class="row">
+        <!-- Grid column -->
+        <div class="col-md-12">
+            <h2 class="py-3 text-center font-bold font-up blue-text">Table</h2>
+        </div>
+        <!-- Grid column -->
+        <div class="button">
+            <a class="btn btn-warning" asp-controller="Import" asp-action="Index" >Import</a>
+            <a class="btn btn-success" asp-controller="Email" asp-action="Index">Export</a>
+        </div>
+    </div>
+    <!-- Grid row -->
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Segment</th>
+                    <th scope="col">Country</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Discount Band</th>
+                    <th scope="col">Unit Sold</th>
+                    <th scope="col">Manufacturing Price</th>
+                    <th scope="col">Sale Price</th>
+                    <th scope="col">Gross Sales</th>
+                    <th scope="col">Discounts</th>
+                    <th scope="col">Sales</th>
+                    <th scope="col">COGS</th>
+                    <th scope="col">Profit</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@(count++)</th>
+                        <td>@item.Segment</td>
+                        <td>@item.Country</td>
+                        <td>@item.Product</td>
+                        <td>@item.DiscountBand</td>
+                        <td>@item.UnitSold</td>
+                        <td>$   @item.ManufacturingPrice</td>
+                        <td>$   @item.SalePrice</td>
+                        <td>$   @item.GrossSales</td>
+                        <td>$   @item.Discounts</td>
+                        <td>$   @item.Sales</td>
+                        <td>$   @item.COGS</td>
+                        <td>$   @item.Profit</td>
+                        <td>@item.Date</td>
+                    </tr>
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        <!--Pagination -->
+        <nav class="my-4 pt-2">
+            @if (pagination.TotalPages > 0)
+            {
+            <ul class="pagination pagination-circle pg-blue mb-0">
+                <li class="page-item @(pagination.CurrentPage <=1 ? "disabled" : "") d-none d-md-block"><a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@pageNo=1">First</a></li>
+                <li class="page-item @(pagination.CurrentPage <=1 ? "disabled" : "")">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@(pagination.CurrentPage - 1)">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                @if (pagination.StartPage > 2)
+                {
+                    <li class="page-item">
+                        <a class="page-link">
+                            <span aria-hidden="true">. . .</span>
+
+                        </a>
+                    </li>
+                }
+                @for (var pge = pagination.StartPage; pge <= pagination.EndPage; pge++)
+                {
+                    <li class="page-item @(pge == pagination.CurrentPage ? "active" : "")">
+                        <a class="page-link" Home" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                    </li>
+                }
+                @if (pagination.CurrentPage < pagination.TotalPages - 2)
+                {
+                    <li class="page-item">
+                        <a class="page-link">
+                            <span aria-hidden="true">. . .</span>
+
+                        </a>
+                    </li>
+                }
+                <li class="page-item @(pagination.CurrentPage >=pagination.TotalPages ? "disabled" : "") ">
+                    <a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@(pagination.CurrentPage + 1)">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+
+                <li class="page-item @(pagination.CurrentPage >=pagination.TotalPages ? "disabled" : "")  clearfix d-none d-md-block"><a class="page-link" asp-controller="Home" asp-action="Index" asp-route-pg="@pagination.TotalPages">Last</a></li>
+            </ul>
+            }
+        </nav>
+        <!--/Pagination -->
+    </div>
+</div>

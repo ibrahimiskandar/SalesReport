@@ -1,0 +1,77 @@
+﻿@model Reporter.Models.EmailModel
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="container">
+    <form asp-controller="Email" asp-action="SendEmail" method="get" enctype="multipart/form-data">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.Message
+            </div>
+        }
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+    <div class="mb-3">
+        <select id="procedure" class="form-control" asp-for="procedureName" asp-items="Html.GetEnumSelectList<Procedure>()">
+            <option value="" selected>Select a procedure</option>
+        </select>
+
+        <div class="mb-3 " id="procedure-items">
+            <select id="2" class="form-control item" asp-for="productName" asp-items="Html.GetEnumSelectList<Product>()">
+                <option value="" selected>Select a product</option>
+            </select>
+            <select id="3" class="form-control item" asp-for="countryName" asp-items="Html.GetEnumSelectList<Country>()">
+                <option value="" selected>Select a countryy</option>
+            </select>
+            <select id="4" class="form-control item" asp-for="segmentName" asp-items="Html.GetEnumSelectList<Segment>()">
+                <option value="" selected>Select a segment</option>
+            </select>
+        </div>
+        <span class="text-danger" asp-validation-for="procedureName"></span>
+        <span class="text-danger" asp-validation-for="productName"></span>
+        <span class="text-danger" asp-validation-for="countryName"></span>
+        <span class="text-danger" asp-validation-for="segmentName"></span>
+    </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="SDATE"> </label>
+            <input class="form-control" asp-for="SDATE" />
+            <span class="text-danger" asp-validation-for="SDATE"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="EDATE"> </label>
+            <input class="form-control" asp-for="EDATE" />
+            <span class="text-danger" asp-validation-for="EDATE"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="To"> </label>
+            <input class="form-control" asp-for="To" />
+            <span class = "text-danger" asp-validation-for="To"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="CC"> </label>
+            <input class="form-control" asp-for="CC" />
+            <span class="text-danger" asp-validation-for="CC"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Subject"> </label>
+            <input class="form-control" asp-for="Subject" />
+            <span class="text-danger" asp-validation-for="Subject"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Description"> </label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span class="text-danger" asp-validation-for="Description"></span>
+        </div>
+        <button type="submit" class="btn btn-success">Send</button>
+    </form>
+</div>
