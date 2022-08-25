@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Import";
-    
+
 }
 
 @if (!string.IsNullOrEmpty(ViewBag.Message))
@@ -18,13 +18,30 @@
         @ViewBag.ErrorMessage
     </div>
 }
-<form asp-controller="Import" asp-action="Upload" method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="mb-3">
-        <label asp-for="ExcelFile">Upload Excel File</label>
-        <input asp-for="ExcelFile" />
-        <button type="submit" class="btn btn-success">Import</button>
-        <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back</a>
+
+<div class="container">
+    <h2 class="text-center mt-4 mb-4">Import Excel To Database</h2>
+    <div class="card">
+        <div class="card-header"><b>Select Excel File</b></div>
+        <div class="card-body">
+            <form asp-controller="Import" asp-action="Upload" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="mb-3">
+
+                    <div id="drop">Drop a file here</div>
+                    <label asp-for="ExcelFile">Upload Excel File</label>
+                    <input asp-for="ExcelFile" id="file" />
+                    <button type="submit" class="btn btn-success">Import</button>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back</a>
+                </div>
+            </form>
+        </div>
     </div>
-</form>
+</div>
+
+<div id="left">
+    <div id="grid"></div>
+    <div id="footnote">
+    </div>
+</div>
 

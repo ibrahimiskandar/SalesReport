@@ -9,10 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- ===== CSS ===== -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+
+    <script src="~/vendor/alertify.js"></script>
+    <script src="//unpkg.com/canvas-datagrid/dist/canvas-datagrid.js"></script>
+
+    <link rel="stylesheet" media="screen" href="~/vendor/samples.css">
+    <link rel="stylesheet" media="screen" href="~/vendor/alertify.css">
+
     <link rel="stylesheet" href="~/css/style.css">
 
     <!-- ===== Boxicons CSS ===== -->
@@ -24,7 +36,100 @@
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
-    
+    <script>
+
+
+        const excel_file = document.getElementById('excel_file');
+
+        excel_file.addEventListener('change', (event) => {
+
+            if (!['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel'].includes(event.target.files[0].type)) {
+                document.getElementById('excel_data').innerHTML = '<div class="alert alert-danger">Only .xlsx or .xls file format are allowed</div>';
+
+                excel_file.value = '';
+
+                return false;
+            }
+
+            var reader = new FileReader();
+
+            reader.readAsArrayBuffer(event.target.files[0]);
+
+            reader.onload = function (event) {
+
+                var data = new Uint8Array(reader.result);
+
+                var work_book = XLSX.read(data, { type: 'array' });
+
+                var sheet_name = work_book.SheetNames;
+
+                var sheet_data = XLSX.utils.sheet_to_json(work_book.Sheets[sheet_name[0]], { header: 1 });
+
+                if (sheet_data.length > 0) {
+                    var table_output = '<table class="table">';
+                    var count = 0;
+
+                    for (var row = 0; row < sheet_data.length; row++) {
+
+                        table_output += '<tr>';
+                        if (count == 0) {
+
+                            table_output += '<th>' + "#" + '</th>';
+                            count++
+                        }
+                        else {
+
+                            table_output += '<th>' + (count++) + '</th>';
+                        }
+                        for (var cell = 0; cell < sheet_data[row].length; cell++) {
+
+                            if (row == 0) {
+
+                                table_output += '<th>' + sheet_data[row][cell] + '</th>';
+
+                            }
+                            else {
+
+                                table_output += '<td>' + sheet_data[row][cell] + '</td>';
+
+                            }
+
+                        }
+
+                        table_output += '</tr>';
+
+                    }
+
+                    table_output += '</table>';
+
+                    document.getElementById('excel_data').innerHTML = table_output;
+                }
+
+                excel_file.value = '';
+
+            }
+
+        });
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36810333-1']);
+        _gaq.push(['_setDomainName', 'sheetjs.com']);
+        _gaq.push(['_setAllowLinker', true]);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <script src="//cdn.sheetjs.com/xlsx-latest/package/dist/shim.min.js"></script>
+    <script src="//cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="~/js/dropsheet.js"></script>
+    <script src="~/js/main.js"></script>
+
+    <script src="~/vendor/spin.js"></script>
+
+   
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

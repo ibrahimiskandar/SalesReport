@@ -10,7 +10,7 @@ using Reporter.Data;
 namespace Reporter.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220822072055_CreateExcelTable")]
+    [Migration("20220823160034_CreateExcelTable")]
     partial class CreateExcelTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

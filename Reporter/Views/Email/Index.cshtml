@@ -27,14 +27,12 @@
         </select>
 
         <div class="mb-3 " id="procedure-items">
-            <select id="2" class="form-control item" asp-for="productName" asp-items="Html.GetEnumSelectList<Product>()">
-                <option value="" selected>Select a product</option>
+            <select id="2" class="form-control item" asp-for="productName" asp-items="Html.GetEnumSelectList<Product>()"> 
             </select>
-            <select id="3" class="form-control item" asp-for="countryName" asp-items="Html.GetEnumSelectList<Country>()">
-                <option value="" selected>Select a countryy</option>
+            <select id="3" class="form-control item" asp-for="countryName" asp-items="Html.GetEnumSelectList<Country>()">       
             </select>
             <select id="4" class="form-control item" asp-for="segmentName" asp-items="Html.GetEnumSelectList<Segment>()">
-                <option value="" selected>Select a segment</option>
+            
             </select>
         </div>
         <span class="text-danger" asp-validation-for="procedureName"></span>

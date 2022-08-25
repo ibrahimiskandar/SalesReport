@@ -1,4 +1,5 @@
 
+
 .darken-grey-text {
     color: #2E2E2E;
 }
@@ -48,4 +49,64 @@ a {
 
 .table.table-bordered th {
     text-align: center;
+}
+
+
+#body {
+    overflow: hidden;
+
+}
+#drop {
+    display:flex;
+    border: 2px dashed #bbb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 25px;
+    justify-content:center;
+    align-items:center;
+    width: 100%;
+    min-height:250px;
+    font: 20pt bold,"Vollkorn";
+    text-align:center;
+    color: #bbb
+}
+
+#left {
+    position: relative;
+    left: 0;
+    padding: 50px 100px;
+}
+
+#logo {
+    padding: 25px;
+}
+
+#header {
+    height: 168px;
+}
+
+#grid {
+    height: 100px;
+    display: none;
+}
+
+.winpt {
+    width: 98%;
+}
+
+.success {
+    color: #468847;
+}
+
+.error {
+    color: #b94a48;
+}
+
+.info {
+    color: #3a87ad;
+}
+
+pre {
+    white-space: pre-wrap;
 }

@@ -9,6 +9,7 @@ namespace Reporter.Models
 {
     public class EmailModel
     {
+        [Required(ErrorMessage = "Procedure Field is required.")]
         [Display(Name = "Procedure")]
         public string procedureName { get; set; }
         [Display(Name = "Product")]
@@ -29,7 +30,6 @@ namespace Reporter.Models
 
         [Required(ErrorMessage = "To Field is required.")]
         [Display(Name = "To")]
-        [AllowedEmailExtensionsAttribute(new string[] { "@code.edu.az" })]
         public string To { get; set; }
 
         [Display(Name = "CC")]
@@ -73,6 +73,7 @@ namespace Reporter.Models
         Mexico = 3,
         Canada = 4,
         France = 5
+        
     }
     public enum Segment
     {

@@ -17,5 +17,7 @@ namespace Reporter.Models
         [AllowedExtensions(new string[] { ".xlsx", ".xls" })]
         public IFormFile ExcelFile { get; set; }
 
+        public string preview { get; set; }
+
     }
 }

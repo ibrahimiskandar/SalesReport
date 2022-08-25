@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Reporter.Models;
-using Stimulsoft.Report;
-using Stimulsoft.Report.Mvc;
 
 namespace Reporter.Controllers
 {
