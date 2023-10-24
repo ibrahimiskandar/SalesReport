@@ -1,4 +1,4 @@
-# Reporter (From Old GitHub Acc)
+# SalesReporter 
 Report web application in ASP .Net Core (MVC) with EF core.
 
 ## Prerequisites
